@@ -14,4 +14,8 @@
       <Folder Include="ViewModels" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
+    </ItemGroup>
+
 </Project>
