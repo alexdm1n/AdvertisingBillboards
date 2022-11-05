@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "DevicesInGroup";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Devices</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/Styles/StyleSheet.css" />
+</head>
+
+<body>
+    <div style="margin: 2% 8%;">
+        <h2>Devices in group</h2>
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Enabled</td>
+                <th scope="row"></th>
+                <td class="btn-group" role="group" aria-label="Basic example">
+                    <form class="form-inline">
+                        <div class="input-group mb-4">
+                            <button type="submit" class="btn btn-outline-primary" style="margin-left: 5px">View Advertisement</button>
+                        </div>
+                    </form>
+                </td>
+                <td class="btn-group mr-3" role="group" aria-label="Basic example">
+                    <div class="btn-group ml-4">
+                        <a class="btn btn-outline-danger mr-3">Delete Device from Device Group</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Enabled</td>
+                <th scope="row"></th>
+                <td class="btn-group" role="group" aria-label="Basic example">
+                    <form class="form-inline">
+                        <div class="input-group mb-4">
+                            <button type="submit" class="btn btn-outline-primary" style="margin-left: 5px">View Advertisement</button>
+                        </div>
+                    </form>
+                </td>
+                <td class="btn-group mr-3" role="group" aria-label="Basic example">
+                    <div class="btn-group ml-4">
+                        <a class="btn btn-outline-danger mr-3">Delete Device from Device Group</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
