@@ -18,4 +18,9 @@ public class UserController : Controller
     {
         return View();
     }
+
+    public IActionResult DevicesInGroup()
+    {
+        return View();
+    }
 }
