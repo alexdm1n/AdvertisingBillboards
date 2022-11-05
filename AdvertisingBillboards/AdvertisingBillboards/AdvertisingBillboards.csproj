@@ -18,4 +18,8 @@
       <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="wwwroot\Styles\Media\Videos\DasAuto.mp4" />
+    </ItemGroup>
+
 </Project>

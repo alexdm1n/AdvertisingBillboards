@@ -8,4 +8,14 @@ public class UserController : Controller
     {
         return View();
     }
+
+    public IActionResult DeviceGroups()
+    {
+        return View();
+    }
+
+    public IActionResult Advertisement()
+    {
+        return View();
+    }
 }
