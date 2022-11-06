@@ -1,18 +1,66 @@
-@model dynamic
-
 @{
-    Layout = null;
+    ViewData["Title"] = "DeviceGroups";
+    Layout = "_Layout";
 }
 
 <!DOCTYPE html>
-
-<html>
 <head>
-    <title>title</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>Device Groups</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="/Styles/StyleSheet.css" />
 </head>
+
 <body>
-<div>
-      
+<div style="margin: 2% 8%;">
+    <h2>My Device Groups: </h2>
+    <table class="table ">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Number of devices</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>3</td>
+            <th scope="row"></th>
+            <td class="btn-group" role="group" aria-label="Basic example">
+                <form class="form-inline">
+                    <div class="input-group mb-4">
+                        <input type="number" name="frequency" value="3" style="width: 60px">
+                        <button type="submit" class="btn btn-outline-primary" style="margin-left: 5px">Set frequency</button>
+                    </div>
+                </form>
+            </td>
+            <td class="btn-group mr-3" role="group" aria-label="Basic example">
+                <div class="btn-group ml-4">
+                    <a class="btn btn-outline-info mr-3">Devices</a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>2</td>
+            <th scope="row"></th>
+            <td class="btn-group" role="group" aria-label="Basic example">
+                <form class="form-inline">
+                    <div class="input-group mb-4">
+                        <input type="number" name="frequency" value="2" style="width: 60px">
+                        <button type="submit" class="btn btn-outline-primary" style="margin-left: 5px">Set frequency</button>
+                    </div>
+                </form>
+            </td>
+            <td class="btn-group mr-3" role="group" aria-label="Basic example">
+                <div class="btn-group ml-4">
+                    <a class="btn btn-outline-info mr-3">Devices</a>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
 </body>
-</html>

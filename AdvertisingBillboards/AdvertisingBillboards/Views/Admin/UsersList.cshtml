@@ -1,18 +1,41 @@
-@model dynamic
-
 @{
-    Layout = null;
+    ViewData["Title"] = "UserList";
+    Layout = "~/Views/Admin/_Layout.cshtml";
 }
-
 <!DOCTYPE html>
-
-<html>
 <head>
-    <title>title</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>Users</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+
 </head>
 <body>
-<div>
-      
-</div>
+    <form class="form-inline m-4">
+            <div class="input-group mb-3">
+                <button type="submit" class="btn btn-success">Add User</button>
+            </div>
+    </form>
+    <div style="margin: 2% 8%;">
+        <thread>
+            <h2>Users: </h2>
+        </thread>
+        <tbody>
+        
+        <ul class="list-group justify-content-center">
+            <li class="list-group-item">
+                <tr>
+                    <td>User1</td>
+                </tr>
+                <button type="submit" class="btn btn-danger float-right">Delete</button>
+                <a  class="btn btn-secondary float-right mr-3">View logs</a>
+            </li>
+            <li class="list-group-item">
+                        <tr>
+                                            <td>User2</td>
+                                        </tr>
+                                        <button type="submit" class="btn btn-danger float-right">Delete</button>
+                        <a  class="btn btn-secondary float-right mr-3">View logs</a>
+                        </li>
+        </ul>
+    </div>
 </body>
-</html>

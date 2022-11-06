@@ -1,18 +1,50 @@
-@model dynamic
-
 @{
-    Layout = null;
+    ViewData["Title"] = "Advertisement";
+    Layout = "_Layout";
 }
-
 <!DOCTYPE html>
-
-<html>
 <head>
-    <title>title</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>Advertisement</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/Styles/StyleSheet.css" />
 </head>
 <body>
-<div>
-      
-</div>
+     <div class="m-3">
+        <ul class="list-group justify-content-center">
+            <li class="list-group-item">
+                <div style="margin-left: 40%">
+                    <h2 class="m-3">Device advertisement: </h2>
+                </div>
+                <div class="m-5 d-flex justify-content-center">
+                    <video controls mutted width="480">
+                        <source src="Styles/Media/Videos/DasAuto.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div style="margin-left: 42%; margin-bottom: 5px">
+                    <div class="btn-group">
+                        <form class="form-inline">
+                            <span class="btn btn-primary btn-file">
+                                Browse <input type="file" name="uploadedVideo" accept="video/mp4">
+                            </span>
+                            <input type="submit" class="btn btn-dark" value="Upload new Advertisement"/>
+                        </form>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="m-3">
+        <ul class="list-group justify-content-center">
+            <li class="list-group-item">
+                <div style="margin-left: 45%">
+                    <a class="btn btn-info">View statistics</a>
+                    <a class="btn btn-danger">
+                        Delete
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
 </body>
-</html>
