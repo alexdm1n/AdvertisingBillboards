@@ -1,4 +1,5 @@
-﻿using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
+﻿using AdvertisingBillboards.DataAccessLayer;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace AdvertisingBillboards;
 
@@ -13,13 +14,8 @@ public class Startup
     
     public void ConfigureServices(IServiceCollection services)
     {
-        services.Configure<CookiePolicyOptions>(options =>
-        {
-            options.CheckConsentNeeded = context => true;
-            options.MinimumSameSitePolicy = SameSiteMode.None;
-        });
-
-        services.AddMvc();
+        services.AddAdvertisingBillboardsModule();
+        services.AddDataAccessLayerModule(Configuration);
     }
     
     [Obsolete("Obsolete")]
