@@ -7,34 +7,42 @@ public class AdvertisementRepository : BaseRepository<Advertisement>
 {
     public AdvertisementRepository(AppDbContext context) : base(context) { }
     
-    public override Advertisement Get(long entityId)
+    public override Advertisement Get(long advertisementId)
     {
-        throw new NotImplementedException();
+        return _context.Advertisements.SingleOrDefault(a => a.Id == advertisementId);
     }
 
     public override IEnumerable<Advertisement> GetAll()
     {
-        throw new NotImplementedException();
+        return _context.Advertisements.Where(a => !a.IsDeleted);
     }
 
-    public override void Update(Advertisement entity)
+    public override void Update(Advertisement advertisement)
     {
-        throw new NotImplementedException();
+        _context.Update(advertisement);
+        _context.SaveChangesAsync();
     }
 
-    public override void Create(Advertisement entity)
+    public override void Create(Advertisement advertisement)
     {
-        _context.Advertisements.Add(entity);
+        _context.Advertisements.Add(advertisement);
         _context.SaveChanges();
     }
 
-    public override void Delete(Advertisement entity)
+    public override void Delete(Advertisement advertisement)
     {
-        throw new NotImplementedException();
+        Update(advertisement);
     }
 
-    public override void Delete(long id)
+    public override void Delete(long advertisementId)
     {
-        throw new NotImplementedException();
+        var advertisement = _context.Advertisements.SingleOrDefault(a => a.Id == advertisementId);
+        if (advertisement is not null)
+        {
+            advertisement.IsDeleted = true;
+            Update(advertisement);
+        }
     }
+    
+    
 }
