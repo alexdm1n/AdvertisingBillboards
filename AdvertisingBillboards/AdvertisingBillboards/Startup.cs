@@ -1,4 +1,5 @@
 ﻿using AdvertisingBillboards.DataAccessLayer;
+using AdvertisingBillboards.Src;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace AdvertisingBillboards;
@@ -16,6 +17,7 @@ public class Startup
     {
         services.AddAdvertisingBillboardsModule();
         services.AddDataAccessLayerModule(Configuration);
+        services.AddSrcModule();
     }
     
     [Obsolete("Obsolete")]
