@@ -12,5 +12,6 @@ public static class SrcModule
         services.AddTransient<IAdvertisementService, AdvertisementService>();
         services.AddTransient<IDeviceService, DeviceService>();
         services.AddTransient<IUserService, UserService>();
+        services.AddTransient<IAdvertisementStatisticsService, AdvertisementStatisticsService>();
     }
 }
