@@ -21,7 +21,6 @@
 
     <ItemGroup>
       <Folder Include="AdvertisingBillboards.Tests" />
-      <Folder Include="DataAccessLayer.Tests" />
       <Folder Include="ServerEmulation.Tests" />
     </ItemGroup>
 
