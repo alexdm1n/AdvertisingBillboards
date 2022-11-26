@@ -60,7 +60,23 @@ public class DeviceGroupServiceTest
     [Test]
     public void Delete_ShouldDeleteDeviceGroup()
     {
-        
-    }
+        // Arrange
+        const long deviceGroupId = 25;
 
+        var deviceGroup = new DeviceGroup()
+        {
+            Id = deviceGroupId,
+            IsDeleted = false,
+        };
+
+        _deviceGroupRepository.Setup(r => r.GetAll()).Returns(new[] { deviceGroup });
+
+        // Act
+        _sut.Delete(deviceGroupId);
+        
+        // Assert
+        _deviceGroupRepository
+            .Verify(r => r
+                .Delete(It.Is<DeviceGroup>(a => a.Id == deviceGroupId && a.IsDeleted)));
+    }
 }
