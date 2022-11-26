@@ -9,6 +9,7 @@ internal class AdvertisementService : IAdvertisementService
 {
     private readonly IDbRepository<Advertisement> _advertisementRepository;
     private readonly IDbRepository<Device> _deviceRepository;
+    private readonly IAdvertisementStatisticsService _advertisementStatisticsService;
     private readonly IVideoAnalyzerService _videoAnalyzerService;
     private readonly string _directory;
 
@@ -16,11 +17,13 @@ internal class AdvertisementService : IAdvertisementService
         IDbRepository<Advertisement> advertisementRepository,
         IDbRepository<Device> deviceRepository,
         IHostingEnvironment environment,
-        IVideoAnalyzerService videoAnalyzerService)
+        IVideoAnalyzerService videoAnalyzerService,
+        IAdvertisementStatisticsService advertisementStatisticsService)
     {
         _advertisementRepository = advertisementRepository;
         _deviceRepository = deviceRepository;
         _videoAnalyzerService = videoAnalyzerService;
+        _advertisementStatisticsService = advertisementStatisticsService;
         _directory = environment.WebRootPath;
     }
 
@@ -62,10 +65,10 @@ internal class AdvertisementService : IAdvertisementService
         advertisement.MemoryLength = advLength;
 
         device.Advertisements = device.Advertisements.Append(advertisement);
+
         _advertisementRepository.Create(advertisement);
         _deviceRepository.Update(device);
-        
-        // Todo: add adv statistics
+        _advertisementStatisticsService.AddAdvertisingStatistics(advertisement.Id);
 
         return filePath;
     }
