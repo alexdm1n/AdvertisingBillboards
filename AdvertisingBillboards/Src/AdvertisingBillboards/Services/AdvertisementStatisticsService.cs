@@ -22,7 +22,6 @@ public class AdvertisementStatisticsService : IAdvertisementStatisticsService
     
     public void AddAdvertisingStatistics(long advId)
     {
-        var advertisement = _advertisementRepository.Get(advId);
         AdvertisementStatistics advertisementStatistics = new AdvertisementStatistics()
         {
             TotalViews = 0,
