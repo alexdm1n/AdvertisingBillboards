@@ -45,6 +45,11 @@ internal class DeviceService : IDeviceService
         _deviceRepository.Update(device);
     }
 
+    public void Delete(long id)
+    {
+        _deviceRepository.Delete(id);
+    }
+
     public IEnumerable<Device> GetByDeviceGroupId(long deviceGroupId)
     {
         return _deviceRepository.GetAll().Where(d => d.DeviceGroup.Id == deviceGroupId);

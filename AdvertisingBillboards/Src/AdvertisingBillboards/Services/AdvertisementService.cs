@@ -49,7 +49,7 @@ internal class AdvertisementService : IAdvertisementService
         _advertisementRepository.Update(advertisement);
     }
 
-    public async Task<string> Create(Advertisement advertisement, long deviceId, long advLength)
+    public async Task Create(Advertisement advertisement, long deviceId)
     {
         var device = _deviceRepository.Get(deviceId);
 
@@ -62,14 +62,11 @@ internal class AdvertisementService : IAdvertisementService
         var filePath = Path.Combine(_directory, "Videos");
 
         advertisement.Path = filePath;
-        advertisement.MemoryLength = advLength;
 
         device.Advertisements = device.Advertisements.Append(advertisement);
 
         _advertisementRepository.Create(advertisement);
         _deviceRepository.Update(device);
         _advertisementStatisticsService.AddAdvertisingStatistics(advertisement.Id);
-
-        return filePath;
     }
 }

@@ -1,6 +1,5 @@
 ﻿using AdvertisingBillboards.DataAccessLayer;
 using AdvertisingBillboards.Src;
-using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace AdvertisingBillboards;
 
@@ -21,7 +20,7 @@ public class Startup
     }
     
     [Obsolete("Obsolete")]
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment())
         {
@@ -42,4 +41,5 @@ public class Startup
             endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
         });
     }
+    
 }

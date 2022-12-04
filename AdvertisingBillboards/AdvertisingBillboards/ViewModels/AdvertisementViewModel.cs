@@ -1,6 +1,10 @@
-﻿namespace AdvertisingBillboards.ViewModels;
+﻿using AdvertisingBillboards.Models.Models;
+
+namespace AdvertisingBillboards.ViewModels;
 
 public class AdvertisementViewModel
 {
-    public string FileName { get; set; }
+    public Device Device { get; set; }
+    
+    public Advertisement Advertisement { get; set; }
 }

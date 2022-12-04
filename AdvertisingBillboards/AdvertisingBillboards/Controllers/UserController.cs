@@ -23,9 +23,4 @@ public class UserController : Controller
     {
         return View();
     }
-
-    public IActionResult AdvertisementStatistics()
-    {
-        return View();
-    }
 }

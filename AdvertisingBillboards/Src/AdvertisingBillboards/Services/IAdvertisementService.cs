@@ -10,5 +10,5 @@ public interface IAdvertisementService
 
     void Update(Advertisement advertisement);
 
-    Task<string> Create(Advertisement advertisement, long deviceId, long advLength);
+    Task Create(Advertisement advertisement, long deviceId);
 }

@@ -1,4 +1,6 @@
-﻿namespace AdvertisingBillboards;
+﻿using AdvertisingBillboards.Services;
+
+namespace AdvertisingBillboards;
 
 public static class AdvertisingBillboardsModule
 {
@@ -9,6 +11,8 @@ public static class AdvertisingBillboardsModule
             options.CheckConsentNeeded = context => true;
             options.MinimumSameSitePolicy = SameSiteMode.None;
         });
+
+        services.AddTransient<IAdminService, AdminService>();
 
         services.AddMvc();
     }

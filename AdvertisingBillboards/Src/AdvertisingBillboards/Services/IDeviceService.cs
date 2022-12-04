@@ -13,4 +13,6 @@ public interface IDeviceService
     IEnumerable<Device> GetByDeviceGroupId(long deviceGroupId);
 
     void SetFrequency(long deviceId, int frequency);
+
+    void Delete(long id);
 }
