@@ -11,10 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ViewModels" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
       <ProjectReference Include="..\Src\Src.csproj" />
     </ItemGroup>

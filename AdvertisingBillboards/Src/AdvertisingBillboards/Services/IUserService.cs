@@ -2,7 +2,7 @@
 
 namespace AdvertisingBillboards.Src.AdvertisingBillboards.Services;
 
-internal interface IUserService
+public interface IUserService
 {
     void Delete(User user);
 

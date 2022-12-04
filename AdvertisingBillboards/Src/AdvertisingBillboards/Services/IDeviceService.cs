@@ -2,7 +2,7 @@
 
 namespace AdvertisingBillboards.Src.AdvertisingBillboards.Services;
 
-internal interface IDeviceService
+public interface IDeviceService
 {
     void Add(long userId);
 

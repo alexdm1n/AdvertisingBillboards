@@ -2,7 +2,7 @@
 
 namespace AdvertisingBillboards.Src.AdvertisingBillboards.Services;
 
-internal interface IAdvertisementService
+public interface IAdvertisementService
 {
     IEnumerable<Advertisement> GetAllForDevice(long deviceId);
 
