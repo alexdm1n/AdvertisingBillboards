@@ -2,7 +2,7 @@
 
 namespace AdvertisingBillboards.Src.AdvertisingBillboards.Services;
 
-internal interface IAdvertisementService
+public interface IAdvertisementService
 {
     IEnumerable<Advertisement> GetAllForDevice(long deviceId);
 
@@ -10,5 +10,5 @@ internal interface IAdvertisementService
 
     void Update(Advertisement advertisement);
 
-    Task<string> Create(Advertisement advertisement, long deviceId, long advLength);
+    Task Create(Advertisement advertisement, long deviceId);
 }

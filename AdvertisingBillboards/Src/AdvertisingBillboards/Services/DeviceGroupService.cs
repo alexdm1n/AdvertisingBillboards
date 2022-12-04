@@ -25,6 +25,11 @@ public class DeviceGroupService : IDeviceGroupService
         return userId != null ? deviceGroups.Where(g => g.User.Id == userId) : deviceGroups;
     }
 
+    public void Create(DeviceGroup deviceGroup)
+    {
+        _deviceGroupRepository.Create(deviceGroup);
+    }
+
     public void Add(long id)
     {
         var user = _userRepository.GetAll().SingleOrDefault(u => u.Id == id);

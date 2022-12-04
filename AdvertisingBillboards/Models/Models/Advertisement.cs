@@ -7,8 +7,6 @@ public class Advertisement
     public bool IsDeleted { get; set; }
     
     public double Duration { get; set; }
-    
-    public double MemoryLength { get; set; }
 
     public string FileName { get; set; }
 

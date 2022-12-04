@@ -2,7 +2,7 @@
 
 namespace AdvertisingBillboards.Src.AdvertisingBillboards.Services;
 
-internal interface IDeviceService
+public interface IDeviceService
 {
     void Add(long userId);
 
@@ -13,4 +13,6 @@ internal interface IDeviceService
     IEnumerable<Device> GetByDeviceGroupId(long deviceGroupId);
 
     void SetFrequency(long deviceId, int frequency);
+
+    void Delete(long id);
 }

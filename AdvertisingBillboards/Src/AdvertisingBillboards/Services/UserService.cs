@@ -3,7 +3,7 @@ using AdvertisingBillboards.Models.Models;
 
 namespace AdvertisingBillboards.Src.AdvertisingBillboards.Services;
 
-internal class UserService : IUserService
+public class UserService : IUserService
 {
     private readonly IDbRepository<User> _userRepository;
 

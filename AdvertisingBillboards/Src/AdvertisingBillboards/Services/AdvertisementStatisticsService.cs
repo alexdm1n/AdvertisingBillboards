@@ -30,4 +30,9 @@ public class AdvertisementStatisticsService : IAdvertisementStatisticsService
 
         _advertisementStatisticsRepository.Create(advertisementStatistics);
     }
+
+    public void Update(AdvertisementStatistics advertisementStatistics)
+    {
+        _advertisementStatisticsRepository.Update(advertisementStatistics);
+    }
 }

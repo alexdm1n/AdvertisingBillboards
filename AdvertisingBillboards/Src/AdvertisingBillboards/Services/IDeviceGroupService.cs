@@ -5,6 +5,8 @@ namespace AdvertisingBillboards.Src.AdvertisingBillboards.Services;
 public interface IDeviceGroupService
 {
     IEnumerable<DeviceGroup> Get(long? userId = null);
+
+    void Create(DeviceGroup deviceGroup);
     
     void Add(long id);
     
