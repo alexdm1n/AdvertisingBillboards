@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AdvertisingBillboards.Src.AdvertisingBillboards.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AdvertisingBillboards.Controllers;
 
@@ -7,8 +8,16 @@ namespace AdvertisingBillboards.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly IUserService _userService;
+
+    public HomeController(IUserService userService)
+    {
+        _userService = userService;
+    }
+
     public IActionResult Index()
     {
-        return View();
+        var users = _userService.GetAll();
+        return View(users);
     }
 }
