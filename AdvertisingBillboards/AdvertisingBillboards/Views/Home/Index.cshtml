@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<AdvertisingBillboards.Models.Models.User>
+@{
     Layout = null;
 }
 
@@ -12,21 +13,20 @@
 <body>
 <div>
     <div class="text-center" style="margin-top: 5px">
-        <button class="btn btn-secondary" type="button">Enter as administrator</button>
+        <button class="btn btn-secondary" type="button" href="@Url.Action("UsersList", "Admin")">Enter as administrator</button>
         <h2 style="margin-top: 10px">Login as user:</h2>
     </div>
     
     <div class="text-center">
         <div class="m-3">
             <ul class="list-group" style="">
-                <li class="list-group-item">Pavel</li>
-                <li class="list-group-item">Dmin</li>
-                <li class="list-group-item">Max</li>
+                @foreach (var user in Model)
+                {
+                    <a class="list-group-item list-group-item-action" asp-controller="User" asp-action="Devices" asp-route-userId="@user.Id">@user.UserName</a>
+                }
             </ul>
         </div>
     </div>
-    
-    
 </div>
 </body>
 </html>
