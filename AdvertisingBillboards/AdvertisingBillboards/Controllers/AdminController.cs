@@ -14,9 +14,9 @@ public class AdminController : Controller
         _adminService = adminService;
     }
 
-    public IActionResult Devices()
+    public IActionResult Devices(long? userId = null)
     {
-        var devicesViewModel = _adminService.Devices();
+        var devicesViewModel = _adminService.Devices(userId);
         return View(devicesViewModel);
     }
 

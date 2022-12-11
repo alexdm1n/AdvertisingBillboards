@@ -70,9 +70,9 @@ internal class AdminService : IAdminService
         return new(users, deviceGroups);
     }
 
-    public UsersDevicesViewModel Devices()
+    public UsersDevicesViewModel Devices(long? userId = null)
     {
-        var devices = _deviceService.GetAll();
+        var devices = _deviceService.GetAll(userId);
         var users = _userService.GetAll();
             
         return new (users, devices);

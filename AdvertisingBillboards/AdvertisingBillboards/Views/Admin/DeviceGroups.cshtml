@@ -48,17 +48,13 @@
                     <td>@Model.DeviceGroups.ElementAt(i).UserId</td>
                     <th scope="row"></th>
                     <td class="btn-group" role="group" aria-label="Basic example">
-                        <form class="form-inline">
-                            <div class="input-group mb-4">
-                                <input type="number" name="frequency" value="3" style="width: 60px">
-                                <a type="submit" class="btn btn-outline-primary mr-3" style="margin-left: 5px">Set frequency</a>
-                                <a type="submit" class="btn btn-danger mr-3">Delete</a>
-                            </div>
+                        <form class="form-inline" method="post" asp-action="DeleteDeviceGroup" asp-route-deviceGroupId="@Model.DeviceGroups.ElementAt(i).Id">
+                            <button type="submit" class="btn btn-danger mr-3">Delete</button>
                         </form>
                     </td>
                     <td class="btn-group mr-3" role="group" aria-label="Basic example">
                         <div class="btn-group ml-4">
-                            <a class="btn btn-outline-info mr-3">Devices</a>
+                            <a class="btn btn-outline-info mr-3" asp-action="Devices" asp-route-userId="@Model.DeviceGroups.ElementAt(i).UserId">Devices</a>
                         </div>
                     </td>
                 </tr>

@@ -11,7 +11,7 @@ public interface IAdminService
 
     UsersDeviceGroupsViewModel DeviceGroups();
 
-    UsersDevicesViewModel Devices();
+    UsersDevicesViewModel Devices(long? userId = null);
 
     IEnumerable<User> UsersList();
 
