@@ -88,9 +88,9 @@ internal class AdminService : IAdminService
         _userService.Add(name);
     }
 
-    public void DeleteUser(User user)
+    public void DeleteUser(long userId)
     {
-        _userService.Delete(user);
+        _userService.Delete(userId);
     }
 
     public void AddDevice(long userId)

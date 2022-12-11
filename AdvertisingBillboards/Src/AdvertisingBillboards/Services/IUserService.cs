@@ -4,7 +4,7 @@ namespace AdvertisingBillboards.Src.AdvertisingBillboards.Services;
 
 public interface IUserService
 {
-    void Delete(User user);
+    void Delete(long userId);
 
     void Add(string userName);
 

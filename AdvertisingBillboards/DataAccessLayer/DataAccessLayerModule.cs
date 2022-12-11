@@ -12,7 +12,7 @@ public static class DataAccessLayerModule
     public static void AddDataAccessLayerModule(this IServiceCollection services, IConfiguration configuration)
     {
         string connectionString = configuration.GetConnectionString("DefaultConnection");
-        services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+        services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Transient);
 
         services.AddTransient<IDbRepository<Advertisement>, AdvertisementRepository>();
         services.AddTransient<IDbRepository<AdvertisementStatistics>, AdvertisementStatisticsRepository>();

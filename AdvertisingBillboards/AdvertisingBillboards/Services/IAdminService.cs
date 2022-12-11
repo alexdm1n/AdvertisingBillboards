@@ -17,7 +17,7 @@ public interface IAdminService
 
     void AddUser(string name);
 
-    void DeleteUser(User user);
+    void DeleteUser(long userId);
 
     void AddDevice(long userId);
 

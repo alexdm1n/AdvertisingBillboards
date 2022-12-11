@@ -14,15 +14,6 @@ public class AdminController : Controller
         _adminService = adminService;
     }
 
-    public override void OnActionExecuted(ActionExecutedContext context)
-    {
-        base.OnActionExecuted(context);
-        var viewBag = _adminService.GetModelsCount();
-        ViewBag.DeviceAmount = viewBag.DevicesAmount;
-        ViewBag.UserAmount = viewBag.UsersAmount;
-        ViewBag.FileAmount = viewBag.AdvertisementsAmount;
-    }
-
     public IActionResult Devices()
     {
         var devicesViewModel = _adminService.Devices();
@@ -61,9 +52,9 @@ public class AdminController : Controller
     }
 
     [HttpPost]
-    public IActionResult DeleteUser([FromRoute]User user)
+    public IActionResult DeleteUser(long userId)
     {
-        _adminService.DeleteUser(user);
+        _adminService.DeleteUser(userId);
         return RedirectToAction("UsersList", "Admin");
     }
 

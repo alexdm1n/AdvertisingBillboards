@@ -12,9 +12,9 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-    public void Delete(User user)
+    public void Delete(long userId)
     {
-        _userRepository.Delete(user);
+        _userRepository.Delete(userId);
     }
 
     public void Add(string userName)
