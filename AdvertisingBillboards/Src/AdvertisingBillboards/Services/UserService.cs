@@ -1,5 +1,6 @@
 ﻿using AdvertisingBillboards.DataAccessLayer.Repositories;
 using AdvertisingBillboards.Models.Models;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace AdvertisingBillboards.Src.AdvertisingBillboards.Services;
 
@@ -21,7 +22,10 @@ public class UserService : IUserService
     {
         var user = new User()
         {
-            UserName = userName
+            UserName = userName,
+            Devices = new List<Device>(),
+            DeviceGroups = new List<DeviceGroup>(),
+            IsDeleted = false,
         };
         
         _userRepository.Create(user);

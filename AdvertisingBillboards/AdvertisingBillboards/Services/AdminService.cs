@@ -106,14 +106,19 @@ internal class AdminService : IAdminService
     public void AddDeviceGroup(long userId)
     {
         var user = _userService.GetAll().SingleOrDefault(u => u.Id == userId);
-        var deviceGroup = new DeviceGroup { User = user };
+        var deviceGroup = new DeviceGroup { User = user, UserId = user.Id };
 
-        if (user == null)
+        if (user.DeviceGroups != null)
         {
-            return;
+            user.DeviceGroups = user.DeviceGroups.Append(deviceGroup);
         }
-
-        user.DeviceGroups = user.DeviceGroups.Append(deviceGroup);
+        else
+        {
+            user.DeviceGroups = new[]
+            {
+                deviceGroup,
+            };
+        }
         
         _deviceGroupService.Create(deviceGroup);
         _userRepository.Update(user);

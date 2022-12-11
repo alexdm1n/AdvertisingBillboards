@@ -18,7 +18,7 @@
     <form class="form-inline m-4" method="post" asp-controller="Admin" asp-action="AddDevice">
         <div class="input-group mb-4">
             <button type="submit" class="btn btn-primary">Add Device</button>
-            <select class="custom-select" name="id" required>
+            <select class="custom-select" name="userId" required>
                 <option selected value="">Choose user</option>
                 @for (var i = 0; i < @Model.Users.Count(); ++i)
                 {
@@ -35,8 +35,7 @@
             <thead>
             <tr>
                 <th scope="col">Id</th>
-                <th scope="col">Status</th>
-                <th scope="col"></th>
+                <th scope="col">UserId</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
@@ -45,14 +44,14 @@
             {
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>Enabled</td>
+                        <td>@Model.Devices.ElementAt(i).Id</td>
+                        <td>@Model.Devices.ElementAt(i).UserId</td>
                         <th scope="row"></th>
                         <td class="btn-group" role="group" aria-label="Basic example">
                             <form class="form-inline" asp-action="SubmitFrequencyForDevice"
                                   asp-route-deviceId="@Model.Devices.ElementAt(i).Id">
                                 <div class="input-group mb-4">
-                                    <input type="number" name="frequency" value="3" style="width: 60px">
+                                    <input type="number" name="frequency" value="@Model.Devices.ElementAt(i).Frequency" style="width: 60px">
                                     <button type="submit" class="btn btn-outline-primary" style="margin-left: 5px">Set frequency</button>
                                 </div>
                             </form>
@@ -61,7 +60,7 @@
                             <div class="btn-group ml-4">
                                 <a class="btn btn-outline-info mr-3" asp-action="Advertisement" asp-route-deviceId="@Model.Devices.ElementAt(i).Id">View advertisement</a>
                                 <form method="post" asp-action="DeleteDevice" asp-route-id="@Model.Devices.ElementAt(i).Id">
-                                    <a type="submit" class="btn btn-danger mr-3">Delete</a>
+                                    <button type="submit" class="btn btn-danger mr-3">Delete</button>
                                 </form>
                             </div>
                         </td>

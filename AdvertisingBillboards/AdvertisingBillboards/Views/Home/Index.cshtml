@@ -1,4 +1,5 @@
-﻿@model IEnumerable<AdvertisingBillboards.Models.Models.User>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<AdvertisingBillboards.Models.Models.User>
 @{
     Layout = null;
 }
@@ -13,8 +14,10 @@
 <body>
 <div>
     <div class="text-center" style="margin-top: 5px">
-        <button class="btn btn-secondary" type="button" href="@Url.Action("UsersList", "Admin")">Enter as administrator</button>
-        <h2 style="margin-top: 10px">Login as user:</h2>
+        <div class="btn btn-group-vertical align-items-md-center">
+            <a href="@Url.Action("UsersList", "Admin")" class="btn btn-secondary">Enter as administrator</a>
+            <h2 style="margin-top: 10px">Login as user:</h2>
+        </div>
     </div>
     
     <div class="text-center">

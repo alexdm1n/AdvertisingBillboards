@@ -1,3 +1,5 @@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model AdvertisingBillboards.ViewModels.UsersDeviceGroupsViewModel
 @{
     ViewData["Title"] = "DeviceGroups";
     Layout = "_Layout";
@@ -12,57 +14,55 @@
 </head>
 
 <body>
-<div style="margin: 2% 8%;">
-    <h2>All Device Groups: </h2>
-    <table class="table ">
-        <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Number of devices</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>3</td>
-            <th scope="row"></th>
-            <td class="btn-group" role="group" aria-label="Basic example">
-                <form class="form-inline">
-                    <div class="input-group mb-4">
-                        <input type="number" name="frequency" value="3" style="width: 60px">
-                        <a type="submit" class="btn btn-outline-primary mr-3" style="margin-left: 5px">Set frequency</a>
-                        <a type="submit" class="btn btn-danger mr-3">Delete</a>
-                    </div>
-                </form>
-            </td>
-            <td class="btn-group mr-3" role="group" aria-label="Basic example">
-                <div class="btn-group ml-4">
-                    <a class="btn btn-outline-info mr-3">Devices</a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>2</td>
-            <th scope="row"></th>
-            <td class="btn-group" role="group" aria-label="Basic example">
-                <form class="form-inline">
-                    <div class="input-group mb-4">
-                        <input type="number" name="frequency" value="2" style="width: 60px">
-                        <a type="submit" class="btn btn-outline-primary mr-3" style="margin-left: 5px">Set frequency</a>
-                        <a type="submit" class="btn btn-danger mr-3">Delete</a>
-                    </div>
-                </form>
-            </td>
-            <td class="btn-group mr-3" role="group" aria-label="Basic example">
-                <div class="btn-group ml-4">
-                    <a class="btn btn-outline-info mr-3">Devices</a>
-                </div>
-            </td>
-        </tr>
-    </table>
-</div>
+    <form class="form-inline m-4" method="post" asp-controller="Admin" asp-action="AddDeviceGroup">
+        <div class="input-group mb-4">
+            <button type="submit" class="btn btn-primary">Add device group</button>
+            <select class="custom-select" name="userId" required>
+                <option selected value="">Choose user</option>
+                @for (var i = 0; i < @Model.Users.Count(); ++i)
+                {
+                    <option value="@Model.Users.ElementAt(i).Id">
+                        @Model.Users.ElementAt(i).UserName
+                    </option>
+                }
+            </select>
+        </div>
+    </form>
+    <div style="margin: 2% 8%;">
+        <h2>All Device Groups: </h2>
+        <table class="table ">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">UserId</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            @for (int i = 0; i < @Model.DeviceGroups.Count(); i++)
+            {
+                <tr>
+                    <td>@Model.DeviceGroups.ElementAt(i).Id</td>
+                    <td>@Model.DeviceGroups.ElementAt(i).UserId</td>
+                    <th scope="row"></th>
+                    <td class="btn-group" role="group" aria-label="Basic example">
+                        <form class="form-inline">
+                            <div class="input-group mb-4">
+                                <input type="number" name="frequency" value="3" style="width: 60px">
+                                <a type="submit" class="btn btn-outline-primary mr-3" style="margin-left: 5px">Set frequency</a>
+                                <a type="submit" class="btn btn-danger mr-3">Delete</a>
+                            </div>
+                        </form>
+                    </td>
+                    <td class="btn-group mr-3" role="group" aria-label="Basic example">
+                        <div class="btn-group ml-4">
+                            <a class="btn btn-outline-info mr-3">Devices</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
 </body>
