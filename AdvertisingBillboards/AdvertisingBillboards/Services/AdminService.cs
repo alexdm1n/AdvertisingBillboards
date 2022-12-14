@@ -49,7 +49,18 @@ internal class AdminService : IAdminService
         var advertisement = _advertisementService.GetAllForDevice(deviceId)?.FirstOrDefault();
         if (advertisement == null)
         {
-            return new();
+            return new()
+            {
+                Advertisement = new()
+                {
+                    FileName = "DasAuto.mp4",
+                    Device = new()
+                    {
+                        Id = deviceId,
+                    }
+                },
+                Device = _deviceService.GetAll().SingleOrDefault(d => d.Id == deviceId),
+            };
         }
 
         var statistics = _advertisementStatisticsService.Get(advertisement.Id)?.SingleOrDefault();

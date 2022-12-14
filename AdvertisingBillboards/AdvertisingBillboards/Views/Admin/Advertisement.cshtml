@@ -1,3 +1,5 @@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model AdvertisingBillboards.ViewModels.AdvertisementViewModel
 @{
     ViewData["Title"] = "Advertisement";
     Layout = "_Layout";
@@ -13,12 +15,12 @@
      <div class="m-3">
         <ul class="list-group justify-content-center">
             <li class="list-group-item">
-                <div style="margin-left: 40%">
-                    <h2 class="m-3">Device advertisement: </h2>
+                <div style="margin-left: 35%">
+                    <h2 class="m-3">Device advertisement: @Model.Advertisement.FileName</h2>
                 </div>
                 <div class="m-5 d-flex justify-content-center">
                     <video controls mutted width="480">
-                        <source src="Videos/DasAuto.mp4" type="video/mp4">
+                        <source src="Videos/@Model.Advertisement.FileName" type="video/mp4">
                     </video>
                 </div>
                 <div style="margin-left: 42%; margin-bottom: 5px">
