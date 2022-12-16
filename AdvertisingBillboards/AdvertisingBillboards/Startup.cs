@@ -38,7 +38,7 @@ public class Startup
         app.UseRouting();
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllerRoute(name: "default", pattern: "{controller=Admin}/{action=Devices}/{id?}");
+            endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
         });
     }
     

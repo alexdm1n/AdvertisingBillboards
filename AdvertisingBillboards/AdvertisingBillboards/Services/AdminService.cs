@@ -54,6 +54,7 @@ internal class AdminService : IAdminService
                 Advertisement = new()
                 {
                     FileName = "DasAuto.mp4",
+                    Id = 1,
                     Device = new()
                     {
                         Id = deviceId,
@@ -64,9 +65,12 @@ internal class AdminService : IAdminService
         }
 
         var statistics = _advertisementStatisticsService.Get(advertisement.Id)?.SingleOrDefault();
-        if (statistics != null) statistics.TotalViews += 1;
-        _advertisementStatisticsService.Update(statistics);
-            
+        if (statistics != null)
+        {
+            statistics.TotalViews += 1;
+            _advertisementStatisticsService.Update(statistics);
+        }
+
         return new()
         {
             Advertisement = advertisement,
@@ -162,12 +166,6 @@ internal class AdminService : IAdminService
 
     public void UploadVideo(IFormFile uploadedVideo, long deviceId)
     {
-        using (var fileStream = new FileStream(Path.Combine(_dir, "file.mp4"), FileMode.Create, FileAccess.Write))
-        {
-            uploadedVideo.CopyTo(fileStream);
-        }
-
-        var advertisement = new Advertisement();
-        _advertisementService.Create(advertisement, deviceId);
+        _advertisementService.Create(uploadedVideo, deviceId, _dir);
     }
 }

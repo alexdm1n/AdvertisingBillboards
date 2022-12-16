@@ -19,13 +19,13 @@
                     <h2 class="m-3">Device advertisement: @Model.Advertisement.FileName</h2>
                 </div>
                 <div class="m-5 d-flex justify-content-center">
-                    <video controls mutted width="480">
-                        <source src="Videos/@Model.Advertisement.FileName" type="video/mp4">
+                    <video controls mutted width="480" autoplay="autoplay">
+                        <source src="~/Videos/@Model.Advertisement.FileName" type="video/mp4">
                     </video>
                 </div>
                 <div style="margin-left: 42%; margin-bottom: 5px">
                     <div class="btn-group">
-                        <form class="form-inline">
+                        <form class="form-inline" asp-action="UploadVideo" asp-route-deviceId="@Model.Device.Id" method="post" enctype="multipart/form-data">
                             <span class="btn btn-primary btn-file">
                                 Browse <input type="file" name="uploadedVideo" accept="video/mp4">
                             </span>
@@ -41,8 +41,8 @@
         <ul class="list-group justify-content-center">
             <li class="list-group-item">
                 <div style="margin-left: 45%">
-                    <a class="btn btn-info">View statistics</a>
-                    <a class="btn btn-danger">
+                    <a class="btn btn-info" asp-action="AdvertisementStatistics" asp-route-advertisementId="@Model.Advertisement.Id">View statistics</a>
+                    <a class="btn btn-danger" asp-action="DeleteAdvertisement" asp-route-advId="@Model.Advertisement.Id">
                         Delete
                     </a>
                 </div>

@@ -13,6 +13,10 @@ public class Advertisement
     public string Path { get; set; }
 
     public Device Device { get; set; }
+    
+    public long DeviceId { get; set; }
+
+    public AdvertisementStatistics AdvertisementStatistics { get; set; }
 
     public bool IsActive { get; set; }
 }

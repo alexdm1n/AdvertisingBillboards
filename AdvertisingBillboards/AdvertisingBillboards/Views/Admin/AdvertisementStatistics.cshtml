@@ -1,4 +1,5 @@
-﻿@model dynamic
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model AdvertisingBillboards.Models.Models.AdvertisementStatistics
 
 @{
     ViewData["Title"] = "AdvertisementStatistics";
@@ -12,9 +13,9 @@
 <body>
 
     <div class="m-3">
-        <h2 class="m-3">Advertising statistics: </h2>
-        <h3 class="m-3">Total Views: <b>4</b></h3>
-        <h4><button class="btn btn-outline-info" style="margin-left: 10px">Back to Advertisement</button></h4>
+        <h2 class="m-3">Advertising statistics for advertisement ID: @Model.AdvertisementId: </h2>
+        <h3 class="m-3">Total Views: <b>@Model.TotalViews</b></h3>
+        <h4><a class="btn btn-outline-info" style="margin-left: 10px" asp-action="Devices" asp-controller="Admin">Back</a></h4>
     </div>
 </body>
 

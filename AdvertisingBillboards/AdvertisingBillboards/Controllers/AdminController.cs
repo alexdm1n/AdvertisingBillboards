@@ -84,7 +84,7 @@ public class AdminController : Controller
         return RedirectToAction("DeviceGroups", "Admin");
     }
     
-    public IActionResult DeleteAdvertising(long advId)
+    public IActionResult DeleteAdvertisement(long advId)
     {
         _adminService.DeleteAdvertisement(advId);
         return RedirectToAction("Devices", "Admin");
