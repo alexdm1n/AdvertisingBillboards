@@ -1,7 +1,5 @@
-using AdvertisingBillboards.Models.Models;
 using AdvertisingBillboards.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace AdvertisingBillboards.Controllers;
 

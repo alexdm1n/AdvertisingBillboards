@@ -1,26 +1,34 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AdvertisingBillboards.Models.Models;
+using AdvertisingBillboards.Services;
+using AdvertisingBillboards.Src.AdvertisingBillboards.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace AdvertisingBillboards.Controllers;
 
 public class UserController : Controller
 {
-    public IActionResult Devices()
+    private readonly IUserControllerService _userService;
+
+    public UserController(IUserControllerService userService)
     {
-        return View();
+        _userService = userService;
     }
 
-    public IActionResult DeviceGroups()
+    public IActionResult Devices(long? userId = null)
     {
-        return View();
+        var devicesViewModel = _userService.Devices(userId);
+        return View(devicesViewModel);
     }
 
-    public IActionResult Advertisement()
+    public IActionResult Advertisement(long deviceId)
     {
-        return View();
+        var advertisement = _userService.Advertisement(deviceId);
+        return View(advertisement);
     }
-
-    public IActionResult DevicesInGroup()
+    public IActionResult SubmitFrequencyForDevice(long deviceId, int frequency)
     {
-        return View();
+        _userService.SubmitFrequencyForDevice(deviceId, frequency);
+        return RedirectToAction("Devices", "User");
     }
 }

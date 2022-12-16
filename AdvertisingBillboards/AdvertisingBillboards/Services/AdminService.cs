@@ -156,7 +156,17 @@ internal class AdminService : IAdminService
 
     public AdvertisementStatistics AdvertisementStatistics(long advertisementId)
     {
-        return _advertisementStatisticsService.Get(advertisementId).FirstOrDefault();
+        var statistics = _advertisementStatisticsService.Get(advertisementId).FirstOrDefault();
+        if (statistics == null)
+        {
+            return new()
+            {
+                TotalViews = 1,
+                AdvertisementId = advertisementId,
+            };
+        }
+
+        return statistics;
     }
 
     public void DeleteAdvertisement(long advId)
