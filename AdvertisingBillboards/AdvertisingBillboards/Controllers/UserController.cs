@@ -21,12 +21,6 @@ public class UserController : Controller
         return View(devicesViewModel);
     }
 
-    public IActionResult DeviceGroups()
-    {
-        var deviceGroupsViewModel = _userService.DeviceGroups();
-        return View(deviceGroupsViewModel);
-    }
-
     public IActionResult Advertisement(long deviceId)
     {
         var advertisement = _userService.Advertisement(deviceId);

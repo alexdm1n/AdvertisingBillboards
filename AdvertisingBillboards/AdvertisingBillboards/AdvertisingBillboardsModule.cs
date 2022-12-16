@@ -13,6 +13,7 @@ public static class AdvertisingBillboardsModule
         });
 
         services.AddTransient<IAdminService, AdminService>();
+        services.AddTransient<IUserControllerService, UserControllerService>();
 
         services.AddMvc();
     }

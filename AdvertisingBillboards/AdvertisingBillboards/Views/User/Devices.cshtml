@@ -1,4 +1,8 @@
-﻿@{
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Linq
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model AdvertisingBillboards.ViewModels.UserDeviceViewModel
+@{
     ViewData["Title"] = "Devices";
     Layout = "_Layout";
 }
@@ -18,49 +22,34 @@
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Status</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>Enabled</td>
-                <th scope="row"></th>
-                <td class="btn-group" role="group" aria-label="Basic example">
-                    <form class="form-inline">
-                        <div class="input-group mb-4">
-                            <input type="number" name="frequency" value="3" style="width: 60px">
-                            <button type="submit" class="btn btn-outline-primary" style="margin-left: 5px">Set frequency</button>
-                        </div>
-                    </form>
-                </td>
-                <td class="btn-group mr-3" role="group" aria-label="Basic example">
-                    <div class="btn-group ml-4">
-                        <a class="btn btn-outline-info mr-3">View advertisement</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Enabled</td>
-                <th scope="row"></th>
-                <td class="btn-group" role="group" aria-label="Basic example">
-                    <form class="form-inline">
-                        <div class="input-group mb-4">
-                            <input type="number" name="frequency" value="2" style="width: 60px">
-                            <button type="submit" class="btn btn-outline-primary" style="margin-left: 5px">Set frequency</button>
-                        </div>
-                    </form>
-                </td>
-                <td class="btn-group mr-3" role="group" aria-label="Basic example">
-                    <div class="btn-group ml-4">
-                        <a class="btn btn-outline-info mr-3">View advertisement</a>
-                    </div>
-                </td>
-            </tr>
+            @for (int i = 0; i < Model.Devices.Count(); i++)
+            {
+                <tbody>
+                    <tr>
+                        <td>@Model.Devices.ElementAt(i).Id</td>
+                        <th scope="row"></th>
+                        <td class="btn-group" role="group" aria-label="Basic example">
+                            <form class="form-inline" asp-action="SubmitFrequencyForDevice"
+                                  asp-route-deviceId="@Model.Devices.ElementAt(i).Id">
+                                <div class="input-group mb-4">
+                                    <input type="number" name="frequency" value="@Model.Devices.ElementAt(i).Frequency" style="width: 60px">
+                                    <button type="submit" class="btn btn-outline-primary" style="margin-left: 5px">Set frequency</button>
+                                </div>
+                            </form>
+                        </td>
+                        <td class="btn-group mr-3" role="group" aria-label="Basic example">
+                            <div class="btn-group ml-4">
+                                <a class="btn btn-outline-info mr-3" asp-action="Advertisement" asp-route-deviceId="@Model.Devices.ElementAt(i).Id">View advertisement</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            }
         </table>
     </div>
 </body>

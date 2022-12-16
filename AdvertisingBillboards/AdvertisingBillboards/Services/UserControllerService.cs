@@ -20,13 +20,15 @@ internal class UserControllerService : IUserControllerService
         IUserService userService,
         IAdvertisementService advertisementService,
         IDeviceGroupService deviceGroupService,
-        IDbRepository<User> userRepository)
+        IDbRepository<User> userRepository,
+        IAdvertisementStatisticsService advertisementStatisticsService)
     {
         _deviceService = deviceService;
         _userService = userService;
         _advertisementService = advertisementService;
         _deviceGroupService = deviceGroupService;
         _userRepository = userRepository;
+        _advertisementStatisticsService = advertisementStatisticsService;
     }
 
     public AdvertisementViewModel Advertisement(long deviceId)
@@ -61,13 +63,6 @@ internal class UserControllerService : IUserControllerService
             Advertisement = advertisement,
             Device = _deviceService.GetAll().SingleOrDefault(d => d.Id == deviceId),
         };
-    }
-
-    public UsersDeviceGroupsViewModel DeviceGroups()
-    {
-        var deviceGroups = _deviceGroupService.Get();
-        var users = _userService.GetAll();
-        return new(users, deviceGroups);
     }
 
     public UserDeviceViewModel Devices(long? userId = null)
