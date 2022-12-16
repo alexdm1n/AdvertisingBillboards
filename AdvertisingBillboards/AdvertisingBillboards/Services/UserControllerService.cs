@@ -70,12 +70,12 @@ internal class UserControllerService : IUserControllerService
         return new(users, deviceGroups);
     }
 
-    public UsersDevicesViewModel Devices(long? userId = null)
+    public UserDeviceViewModel Devices(long? userId = null)
     {
-        var devices = _deviceService.GetAll(userId);
-        var users = _userService.GetAll();
+        var device = _deviceService.GetAll(userId);
+        var user = _userService.GetAll().FirstOrDefault();
             
-        return new (users, devices);
+        return new (user, device);
     }
     
     public void SubmitFrequencyForDevice(long deviceId, int frequency)

@@ -10,9 +10,7 @@ public interface IUserControllerService
 
     UsersDeviceGroupsViewModel DeviceGroups();
 
-    UsersDevicesViewModel Devices(long? userId = null);
+    UserDeviceViewModel Devices(long? userId = null);
 
     void SubmitFrequencyForDevice(long deviceId, int frequency);
-
-    void SubmitFrequencyForDeviceGroup(long deviceId, int frequency);
 }
