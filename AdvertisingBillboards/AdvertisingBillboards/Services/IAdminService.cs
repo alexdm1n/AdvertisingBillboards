@@ -11,13 +11,13 @@ public interface IAdminService
 
     UsersDeviceGroupsViewModel DeviceGroups();
 
-    UsersDevicesViewModel Devices();
+    UsersDevicesViewModel Devices(long? userId = null);
 
     IEnumerable<User> UsersList();
 
     void AddUser(string name);
 
-    void DeleteUser(User user);
+    void DeleteUser(long userId);
 
     void AddDevice(long userId);
 

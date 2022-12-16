@@ -2,6 +2,7 @@
 using AdvertisingBillboards.Models.Models;
 using AdvertisingBillboards.Src.AdvertisingBillboards.Services.VideoAnalyzer;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace AdvertisingBillboards.Src.AdvertisingBillboards.Services;
 
@@ -10,21 +11,16 @@ internal class AdvertisementService : IAdvertisementService
     private readonly IDbRepository<Advertisement> _advertisementRepository;
     private readonly IDbRepository<Device> _deviceRepository;
     private readonly IAdvertisementStatisticsService _advertisementStatisticsService;
-    private readonly IVideoAnalyzerService _videoAnalyzerService;
-    private readonly string _directory;
 
     public AdvertisementService(
         IDbRepository<Advertisement> advertisementRepository,
         IDbRepository<Device> deviceRepository,
-        IHostingEnvironment environment,
         IVideoAnalyzerService videoAnalyzerService,
         IAdvertisementStatisticsService advertisementStatisticsService)
     {
         _advertisementRepository = advertisementRepository;
         _deviceRepository = deviceRepository;
-        _videoAnalyzerService = videoAnalyzerService;
         _advertisementStatisticsService = advertisementStatisticsService;
-        _directory = environment.WebRootPath;
     }
 
     public IEnumerable<Advertisement> GetAllForDevice(long deviceId)
@@ -49,21 +45,36 @@ internal class AdvertisementService : IAdvertisementService
         _advertisementRepository.Update(advertisement);
     }
 
-    public async Task Create(Advertisement advertisement, long deviceId)
+    public void Create(IFormFile uploadedVideo, long deviceId, string dir)
     {
-        var device = _deviceRepository.Get(deviceId);
+        var advertisement = new Advertisement();
 
-        advertisement.Device = device;
-        advertisement.Duration = await _videoAnalyzerService.GetVideoDuration(_directory);
+        var device = _deviceRepository.Get(deviceId);
 
         var blankAdvertisementId = _advertisementRepository.GetAll().LastOrDefault()?.Id ?? 0;
 
         advertisement.FileName = $"device-{deviceId}-adv-{blankAdvertisementId + 1}.mp4";
-        var filePath = Path.Combine(_directory, "Videos");
+        
+        using (var fileStream = new FileStream(Path.Combine(dir, $"Videos/{advertisement.FileName}"), FileMode.Create, FileAccess.Write))
+        {
+            uploadedVideo.CopyTo(fileStream);
+        }
+        var filePath = Path.Combine(dir, "Videos");
 
         advertisement.Path = filePath;
+        advertisement.DeviceId = deviceId;
 
-        device.Advertisements = device.Advertisements.Append(advertisement);
+        if (device.Advertisements == null)
+        {
+            device.Advertisements = new[]
+            {
+                advertisement
+            };
+        }
+        else
+        {
+            device.Advertisements = device.Advertisements.Append(advertisement);
+        }
 
         _advertisementRepository.Create(advertisement);
         _deviceRepository.Update(device);

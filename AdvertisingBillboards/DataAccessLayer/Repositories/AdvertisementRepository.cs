@@ -1,5 +1,6 @@
 ﻿using AdvertisingBillboards.DataAccessLayer.ApplicationDbContext;
 using AdvertisingBillboards.Models.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdvertisingBillboards.DataAccessLayer.Repositories;
 
@@ -9,12 +10,20 @@ public class AdvertisementRepository : BaseRepository<Advertisement>
     
     public override Advertisement Get(long advertisementId)
     {
-        return _context.Advertisements.SingleOrDefault(a => a.Id == advertisementId);
+        return _context.Advertisements
+            .Include(d => d.Device)
+            .ThenInclude(u => u.User)
+            .Include(ads => ads.AdvertisementStatistics)
+            .SingleOrDefault(a => a.Id == advertisementId);
     }
 
     public override IEnumerable<Advertisement> GetAll()
     {
-        return _context.Advertisements.Where(a => !a.IsDeleted);
+        return _context.Advertisements
+            .Include(d => d.Device)
+            .ThenInclude(u => u.User)
+            .Include(ads => ads.AdvertisementStatistics)
+            .Where(a => !a.IsDeleted);
     }
 
     public override void Update(Advertisement advertisement)

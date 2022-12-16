@@ -38,7 +38,17 @@ public class DeviceGroupService : IDeviceGroupService
             return;
         }
         var deviceGroup = new DeviceGroup { User = user };
-        user.DeviceGroups = user.DeviceGroups.Append(deviceGroup);
+        if (user.DeviceGroups != null)
+        {
+            user.DeviceGroups = user.DeviceGroups.Append(deviceGroup);
+        }
+        else
+        {
+            user.DeviceGroups = new[]
+            {
+                deviceGroup,
+            };
+        }
         _deviceGroupRepository.Create(deviceGroup);
         _userRepository.Update(user);
     }

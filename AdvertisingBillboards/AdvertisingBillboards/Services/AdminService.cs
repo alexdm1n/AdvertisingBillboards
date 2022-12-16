@@ -49,13 +49,28 @@ internal class AdminService : IAdminService
         var advertisement = _advertisementService.GetAllForDevice(deviceId)?.FirstOrDefault();
         if (advertisement == null)
         {
-            return new();
+            return new()
+            {
+                Advertisement = new()
+                {
+                    FileName = "DasAuto.mp4",
+                    Id = 1,
+                    Device = new()
+                    {
+                        Id = deviceId,
+                    }
+                },
+                Device = _deviceService.GetAll().SingleOrDefault(d => d.Id == deviceId),
+            };
         }
 
         var statistics = _advertisementStatisticsService.Get(advertisement.Id)?.SingleOrDefault();
-        if (statistics != null) statistics.TotalViews += 1;
-        _advertisementStatisticsService.Update(statistics);
-            
+        if (statistics != null)
+        {
+            statistics.TotalViews += 1;
+            _advertisementStatisticsService.Update(statistics);
+        }
+
         return new()
         {
             Advertisement = advertisement,
@@ -70,9 +85,9 @@ internal class AdminService : IAdminService
         return new(users, deviceGroups);
     }
 
-    public UsersDevicesViewModel Devices()
+    public UsersDevicesViewModel Devices(long? userId = null)
     {
-        var devices = _deviceService.GetAll();
+        var devices = _deviceService.GetAll(userId);
         var users = _userService.GetAll();
             
         return new (users, devices);
@@ -88,9 +103,9 @@ internal class AdminService : IAdminService
         _userService.Add(name);
     }
 
-    public void DeleteUser(User user)
+    public void DeleteUser(long userId)
     {
-        _userService.Delete(user);
+        _userService.Delete(userId);
     }
 
     public void AddDevice(long userId)
@@ -106,14 +121,19 @@ internal class AdminService : IAdminService
     public void AddDeviceGroup(long userId)
     {
         var user = _userService.GetAll().SingleOrDefault(u => u.Id == userId);
-        var deviceGroup = new DeviceGroup { User = user };
+        var deviceGroup = new DeviceGroup { User = user, UserId = user.Id };
 
-        if (user == null)
+        if (user.DeviceGroups != null)
         {
-            return;
+            user.DeviceGroups = user.DeviceGroups.Append(deviceGroup);
         }
-
-        user.DeviceGroups = user.DeviceGroups.Append(deviceGroup);
+        else
+        {
+            user.DeviceGroups = new[]
+            {
+                deviceGroup,
+            };
+        }
         
         _deviceGroupService.Create(deviceGroup);
         _userRepository.Update(user);
@@ -146,12 +166,6 @@ internal class AdminService : IAdminService
 
     public void UploadVideo(IFormFile uploadedVideo, long deviceId)
     {
-        using (var fileStream = new FileStream(Path.Combine(_dir, "file.mp4"), FileMode.Create, FileAccess.Write))
-        {
-            uploadedVideo.CopyTo(fileStream);
-        }
-
-        var advertisement = new Advertisement();
-        _advertisementService.Create(advertisement, deviceId);
+        _advertisementService.Create(uploadedVideo, deviceId, _dir);
     }
 }

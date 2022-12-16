@@ -1,5 +1,6 @@
 ﻿using AdvertisingBillboards.DataAccessLayer.Repositories;
 using AdvertisingBillboards.Models.Models;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace AdvertisingBillboards.Src.AdvertisingBillboards.Services;
 
@@ -12,16 +13,19 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-    public void Delete(User user)
+    public void Delete(long userId)
     {
-        _userRepository.Delete(user);
+        _userRepository.Delete(userId);
     }
 
     public void Add(string userName)
     {
         var user = new User()
         {
-            UserName = userName
+            UserName = userName,
+            Devices = new List<Device>(),
+            DeviceGroups = new List<DeviceGroup>(),
+            IsDeleted = false,
         };
         
         _userRepository.Create(user);

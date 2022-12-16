@@ -21,9 +21,20 @@ internal class DeviceService : IDeviceService
         {
             User = user,
             Frequency = 1,
+            UserId = user.Id,
         };
 
-        user.Devices = user.Devices.Append(device);
+        if (user.Devices != null)
+        {
+            user.Devices = user.Devices.Append(device);
+        }
+        else
+        {
+            user.Devices = new[]
+            {
+                device,
+            };
+        }
         
         _deviceRepository.Create(device);
         _userRepository.Update(user);
@@ -37,7 +48,7 @@ internal class DeviceService : IDeviceService
             return devices;
         }
 
-        return devices.Where(d => d.User.Id == userId);
+        return devices.Where(d => d.UserId == userId);
     }
 
     public void Update(Device device)

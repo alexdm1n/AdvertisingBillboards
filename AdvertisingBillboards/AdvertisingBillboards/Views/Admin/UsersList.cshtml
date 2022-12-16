@@ -1,3 +1,5 @@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<AdvertisingBillboards.Models.Models.User>
 @{
     ViewData["Title"] = "UserList";
     Layout = "~/Views/Admin/_Layout.cshtml";
@@ -10,9 +12,10 @@
 
 </head>
 <body>
-    <form class="form-inline m-4">
+    <form class="form-inline m-4" method="post" asp-action="AddUser">
             <div class="input-group mb-3">
                 <button type="submit" class="btn btn-success">Add User</button>
+                <input type="text" required  name="name" class="form-control" placeholder="Enter the name of user">
             </div>
     </form>
     <div style="margin: 2% 8%;">
@@ -22,20 +25,16 @@
         <tbody>
         
         <ul class="list-group justify-content-center">
-            <li class="list-group-item">
-                <tr>
-                    <td>User1</td>
-                </tr>
-                <button type="submit" class="btn btn-danger float-right">Delete</button>
-                <a  class="btn btn-secondary float-right mr-3">View logs</a>
-            </li>
-            <li class="list-group-item">
-            <tr>
-                <td>User2</td>
-            </tr>
-            <button type="submit" class="btn btn-danger float-right">Delete</button>
-            <a  class="btn btn-secondary float-right mr-3">View logs</a>
-            </li>
+            @foreach (var user in Model)
+            {
+                <li class="list-group-item">
+                    @user.UserName
+                    <form method="post" asp-action="DeleteUser" 
+                          asp-route-userId="@user.Id">
+                        <button type="submit" class="btn btn-danger float-right">Delete</button>
+                    </form>
+                </li>
+            }
         </ul>
     </div>
 </body>

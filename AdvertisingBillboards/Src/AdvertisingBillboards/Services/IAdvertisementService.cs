@@ -1,4 +1,5 @@
 ﻿using AdvertisingBillboards.Models.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace AdvertisingBillboards.Src.AdvertisingBillboards.Services;
 
@@ -10,5 +11,5 @@ public interface IAdvertisementService
 
     void Update(Advertisement advertisement);
 
-    Task Create(Advertisement advertisement, long deviceId);
+    void Create(IFormFile uploadedVideo, long deviceId, string directory);
 }
